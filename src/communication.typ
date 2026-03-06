@@ -8,7 +8,7 @@
   $Pi^(-1)$ 具有 "Rectangle property"，$forall T in cal(T), Pi^(-1)(T)$ 是一个 Rectangle：
 
   $
-  Pi^(-1)(T) = product_(i=1)^n pi_i(Pi^(-1)(T))
+  Pi^(-1)(T) = product_(i=1)^n pi_i (Pi^(-1)(T))
   $
 
   可以理解成，如果有任意两个所有 Party 的私有状态集合 $S_1, S_2$ 满足 $Pi(S_1) = Pi(S_2) = T$，那么可以把 $S_1$ 和 $S_2$ 任意组合（每个 Party 任意在两者中选一个），那么最终 Transcript 依旧是 $T$。
