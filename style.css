@@ -1,0 +1,76 @@
+@import "https://fonts.thu.fail/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap";
+
+* {
+  box-sizing: inherit;
+}
+
+:root {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", "Source Han Sans SC", "Source Han Sans", sans-serif;
+  font-size: 14px;
+  background-color: #fdfdf6;
+  color: #333;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", "Source Han Serif SC", "Source Han Serif", serif;
+  font-weight: 700;
+}
+
+main {
+  padding: 40px;
+  max-width: 650px;
+  margin: 0 auto;
+
+  @media (max-width: 700px) {
+    padding: 20px;
+  }
+}
+
+h1 {
+  color: #8a5113;
+  margin-bottom: 6px;
+}
+
+a {
+  color: #512f0b;
+}
+
+.post-meta {
+  color: rgba(0,0,0,.3);
+  font-size: 12px;
+  margin-bottom: 20px;
+  color: rgba(0,0,0,.3);
+
+  & a {
+    color: rgba(0,0,0,.3);
+  }
+}
+
+article {
+  position: relative;
+  padding: 0 20px;
+  margin: 40px 0;
+
+  @media (max-width: 700px) {
+    margin: 20px 0;
+  }
+}
+
+article::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 5px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-left: none;
+}

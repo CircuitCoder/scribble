@@ -1,0 +1,53 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history needed by build.ts for git dates
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install
+
+      - name: Generate posts.typ
+        run: bun run build
+
+      - uses: typst-community/setup-typst@v4
+
+      - name: Compile to HTML
+        run: typst compile --features html -f html index.typ
+
+      - name: Prepare deployment directory
+        run: |
+          HASH=${{ github.sha }}
+          mkdir -p _site/"$HASH"
+
+          # Root-level files
+          cp index.html _site/
+          cp *.css _site/ 2>/dev/null || true
+          cp *.js _site/ 2>/dev/null || true
+          if [ -d assets ]; then cp -r assets _site/assets; fi
+
+          # Commit-hash snapshot (for permalinks)
+          cp index.html _site/"$HASH"/
+          cp *.css _site/"$HASH"/ 2>/dev/null || true
+          cp *.js _site/"$HASH"/ 2>/dev/null || true
+          if [ -d assets ]; then cp -r assets _site/"$HASH"/assets; fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          keep_files: true
+          cname: scribble.meow.plus
