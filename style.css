@@ -25,12 +25,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 main {
-  padding: 40px;
+  padding: 20px 40px;
   max-width: 650px;
   margin: 0 auto;
 
   @media (max-width: 700px) {
-    padding: 20px;
+    padding: 0 20px;
   }
 }
 
@@ -56,21 +56,20 @@ a {
 
 article {
   position: relative;
-  padding: 0 20px;
-  margin: 40px 0;
-
-  @media (max-width: 700px) {
-    margin: 20px 0;
-  }
+  padding: 20px;
 }
 
 article::after {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 20px;
+  bottom: 20px;
   left: 100%;
+  transform: translateX(10px);
   width: 5px;
   border: 1px solid rgba(0,0,0,.1);
   border-left: none;
+  @media (max-width: 700px) {
+    transform: translateX(5px);
+  }
 }
