@@ -28,7 +28,7 @@
 
   考虑有限域 $"GF"(q)$ 上的 Reed-Solomon 码，共 $n - 2t$ 个数据，$2t$ 个冗余，总共采样点 $n$ 个。现在要找出来其中最多 $t$ 个错的点。
 
-  假设 Underlying polynomial 是 $F(x)$，Claim 存在一个多项式 $E(x)$，满足 $E(x_i) = 0 <= x_i "是错误的点" <=> F(x_i) eq.not y_i$。*如果 $x_i$ 不是错误的点，对 $E(x_i)$ 没有要求*。因为最多 $t$ 个错误，所以我们可以要求 $deg E(x) = t$，并且最高次项系数为 $1$，$E(x)$ 剩下 $t$ 个系数未知。
+  假设 Underlying polynomial 是 $F(x)$，Claim 存在一个多项式 $E(x)$，满足 $E(x_i) = 0 <= x_i "incorrect" <=> F(x_i) eq.not y_i$。*如果 $x_i$ 不是错误的点，对 $E(x_i)$ 没有要求*。因为最多 $t$ 个错误，所以我们可以要求 $deg E(x) = t$，并且最高次项系数为 $1$，$E(x)$ 剩下 $t$ 个系数未知。
 
   $E(x_i) F(x_i) = E(x_i) y_i$ 对所有采样点成立。这给我们提供了 $n$ 个方程，$deg F(x) = n - 2t - 1$，令 $Q(x) = E(x) F(x)$，$deg Q(x) = n - t - 1$，线性系统 $Q(x_i) - E(x_i) y_i$ 一共 $n$ 个方程，$n$ 个未知数，可以解出 $Q(x)$ 和 $E(x)$，之后 $F(x) = Q(x) / E(x)$ 或者 Chien search. 复杂度 $cal(O)(n^3)$
 
