@@ -3,7 +3,7 @@
 #common.scribble-post("通讯")[
   == Rectangle property
 
-  在 MPC 设定下，如果暂时不考虑 Active malicious adversary 的话，节点的私有状态 $(x_i, r_i)$ i.e. 输入和随机性可以确定性决定 Transcript $T$。将这一映射称为 $\Pi$.
+  在 MPC 设定下，如果暂时不考虑 Active malicious adversary 的话，节点的私有状态 $(x_i, r_i)$ i.e. 输入和随机性可以确定性决定 Transcript $T$。将这一映射称为 $Pi$.
 
   $Pi^(-1)$ 具有 "Rectangle property"，$forall T in cal(T), Pi^(-1)(T)$ 是一个 Rectangle：
 
