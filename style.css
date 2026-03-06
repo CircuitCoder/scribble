@@ -1,0 +1,60 @@
+@import "https://fonts.thu.fail/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap";
+
+* {
+  box-sizing: inherit;
+}
+
+:root {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", "Source Han Sans SC", "Source Han Sans", sans-serif;
+  font-size: 16px;
+  background-color: #fdfdf6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", "Source Han Serif SC", "Source Han Serif", serif;
+  font-weight: 700;
+}
+
+main {
+  padding: 20px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #8a5113;
+  margin-bottom: 6px;
+}
+
+.post-meta {
+  color: rgba(0,0,0,.3);
+  font-size: 12px;
+  margin-bottom: 20px;
+
+  & a {
+    color: rgba(0,0,0,.3);
+  }
+}
+
+article {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+article::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 5px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-left: none;
+}
