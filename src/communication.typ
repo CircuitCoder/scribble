@@ -26,13 +26,29 @@
 
   Reed-Solomon 如果有 $2t$ 冗余可以纠 $t$ 个错 (Also, Shamir Secret Sharing).
 
-  考虑有限域 $"GF"(q)$ 上的 Reed-Solomon 码，共 $n - 2t$ 个数据，$2t$ 个冗余，总共采样点 $n$ 个。现在要找出来其中最多 $t$ 个错的点。
+  考虑有限域 $"GF"(q)$ 上的 Reed-Solomon 码，共 $n - 2t$ 个数据，$2t$ 个冗余，总共采样点 $n$ 个。现在要找出来其中最多 $t$ 个错的点。如果我们忽略多项式的其他结构，认为这些采样点是任选的，下面陈述的方法是找到这些错误点的标准方法 Berlekamp-Welch algorithm。
+
+  === Berlekamp-Welch
 
   假设 Underlying polynomial 是 $F(x)$，Claim 存在一个多项式 $E(x)$，满足 $x_i "incorrect" <=> F(x_i) eq.not y_i => E(x_i) = 0$。*如果 $x_i$ 不是错误的点，对 $E(x_i)$ 没有要求*。因为最多 $t$ 个错误，所以我们可以要求 $deg E(x) = t$，并且最高次项系数为 $1$，$E(x)$ 剩下 $t$ 个系数未知。
 
   $E(x_i) F(x_i) = E(x_i) y_i$ 对所有采样点成立。这给我们提供了 $n$ 个方程，$deg F(x) = n - 2t - 1$，令 $Q(x) = E(x) F(x)$，$deg Q(x) = n - t - 1$，线性系统 $Q(x_i) - E(x_i) y_i$ 一共 $n$ 个方程，$n$ 个未知数，可以解出 $Q(x)$ 和 $E(x)$，之后 $F(x) = Q(x) / E(x)$ 或者 Chien search. 复杂度 $cal(O)(n^3)$
 
   Alternatively, 这是一个 Rational polynomial interpolation 问题，$Q(x_i) / E(x_i)$ 经过 $n$ 个点。wo/ FFT 复杂度 $cal(O)(n^2)$, w/ FFT 复杂度 $cal(O)(n log^2 n)$。（但我都不会）
+
+  == Generator view vs. evaluation view
+
+  有两种 (somewhat equivalent) 看待 Reed-Solomon code 的方式。
+
+  SSS 里常见的构造对应 RS code 的 Evaluation view，这也是 Reed & Solomon's original view: 数据在 pre-defined points of evaluation. RS code 目前实现中常见的方法是 Generator view (BCH view): 数据在 polynomial coefficients 上。两者之间的转换就是一次 NFT.
+
+  对于 Generator view 的 RS code，预先选定的是一个 Generator polynomial $G(x)$，$deg G(x) = 2t$。Underlying field $F$ 满足 $|F| = n+1$，要求 $G(x) divides x^n - 1$。Generator polynomial 的常见构造方式是选定一个 Underlying field $F$ 的 primitive element $alpha$, $G(x) = sum_(i=0)^(2t) alpha^i x^i$。
+
+  对于 $m$ 个消息 $r_0, ..., r_(m-1)$，Message polynomial 是 $M(x) = sum_(i=0)^(m-1) r_i x^i$。有两种编码方式得到 Codeword $C(x)$：
+  - 简单编码直接让 $C(x) = G(x) dot M(x)$。解码的时候需要做一次多项式除法，错误校验是看余多项式。
+  - Systematic encoding 令 $C'(x) = M(x) dot x^2t$，然后 $C(x) = C'(x) - (C'(x) mod G(x))$。Systematic encoding 的好处是前 $m$ 个符号就是消息，解码的时候非常简单，但是错误校验还是得做一次除法。
+
+  Sidenote: 因为消息总能做 Padding，尤其是 Systematic encoding 里面消息 Padding 直接对应 Codeword padding，所以都可以不传这部分 Codeword。因此 $n = |F| - 1$ 的限制事实上限制的是最大 Block length。Evaluation view 也有类似的限制，这个限制来自于 Evaluation point 的个数。但是因为可以选任意 $F$ 元素当作 evaluation point，所以限制比 Generator view 要大 1. (Related: Extended RS & Doubly-extended RS， 但是我不懂这些)
 
   TODO: 看看 Berlekamp-Massey
 ]
