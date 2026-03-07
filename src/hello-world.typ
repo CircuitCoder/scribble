@@ -11,5 +11,7 @@
 
   这里的想法成熟之后可能会整理变成#link("https://layered.meow.plus")[我的博客]的帖子，内容也可能会随便删改修订，如果需要 Permalink 的话请复制每个 Section 标题下方更新日期的那个链接，那个链接带有 Commit Hash，可以保证不变。
 
+  这里没有评论区，可以直接在 Repo 的 Issue section 发 issue。
+
   - Git Repo: #link("https://github.com/CircuitCoder/scribble")[CircuitCoder/scribble]
 ]
