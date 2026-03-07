@@ -51,3 +51,31 @@ jobs:
           publish_dir: ./_site
           keep_files: true
           cname: scribble.meow.plus
+
+      - name: Notify Telegram
+        if: env.TELEGRAM_BOT_TOKEN != ''
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=format:'%s')
+
+          # Find changed .typ files under src/ in this commit
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'src/*.typ' 2>/dev/null || true)
+
+          LINKS=""
+          for f in $CHANGED; do
+            POST_ID=$(basename "$f" .typ)
+            LINKS="${LINKS}• <a href=\"https://scribble.meow.plus/#post-${POST_ID}\">#${POST_ID}</a>"$'\n'
+          done
+
+          if [ -z "$LINKS" ]; then
+            TEXT="${COMMIT_MSG}"
+          else
+            TEXT="${COMMIT_MSG}"$'\n'$'\n'"Changed posts:"$'\n'"${LINKS}"
+          fi
+
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHANNEL_ID}" \
+            -d parse_mode=HTML \
+            --data-urlencode "text=${TEXT}"
