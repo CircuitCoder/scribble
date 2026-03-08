@@ -34,6 +34,22 @@ main {
   }
 }
 
+nav {
+  padding: 20px 60px;
+  max-width: 650px;
+  margin: 0 auto;
+
+  @media (max-width: 700px) {
+    padding: 20px 40px;
+  }
+  font-size: 12px;
+
+  & a {
+    color: rgba(0,0,0,.3);
+    margin-right: 10px;
+  }
+}
+
 h1 {
   color: #8a5113;
   margin-bottom: 6px;
