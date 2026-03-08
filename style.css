@@ -73,3 +73,13 @@ article::after {
     transform: translateX(5px);
   }
 }
+
+pre:has(code) {
+  overflow-x: auto;
+  position: relative;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background: rgba(0,0,0,.08);
+}
