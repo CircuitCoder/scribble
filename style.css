@@ -83,3 +83,10 @@ pre:has(code) {
   border-radius: 5px;
   background: rgba(0,0,0,.08);
 }
+
+blockquote {
+  margin: 10px 0;
+  /* Avoid margin collapse */
+  padding: 0.01px 20px;
+  border-left: rgba(0,0,0,.1) 10px solid;
+}

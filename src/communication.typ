@@ -57,12 +57,17 @@
 
   在 Generator view 构造中，Berlekamp-Welch 无法直接使用。Berlekamp-Massey 是一个求最小 LFSR 的算法，在 RS code 中可以用于在 generator view 的构造中替代 Berlekamp-Welch 做错误定位。
 
-  注意到，两种 encoding 如果理解成 $M(x) |-> C(x)$ 在 $FF[x]_(m+2t-1)$多项式空间里的函数，都是可逆线性的。因为 $M(x)$ 是一个 degree-m 子空间，因此所有无错误 Codeword 也是一个 degree-m 子空间。错误校验是判定一个多项式是否在这个空间内。
+  注意到，两种 encoding 如果理解成 $M(x) |-> C(x)$ 在 $FF[x]_(<= m+2t-1)$多项式空间里的函数，都是可逆线性的。因为 $M(x)$ 是一个 degree-m 子空间，因此所有无错误 Codeword 也是一个 degree-m 子空间。错误校验是判定一个多项式是否在这个空间内。
 
   在这个多项式空间上取以下内积结构：系数乘积的和 (i.e. 选取 ${x^i}$ 做基映射到 $FF^n$)。$C(x)$。Codeword 空间的正交补空间 degree 是 $m + 2t - m = 2t$，因此可以通过 $2t$ 个多项式来 span 这个正交补空间。
 
-  定义 *Parity-check polynomial* $H(x) = (x^n - 1) / G(x)$。$deg H(x) = n - 2t = m$，所以 $H(x) dot x^0, H(x) dot x, ..., H(x) dot x^(2t-1)$ 都还在 $FF[x]_(m+2t-1)$ 内，并且线性无关。这是正交补空间的一组基。
-  #quote(block: true)[对于使用 Power of primitive root 构造的 $G(x)$，有更简单的办法给一组基。注意到任何 $G(x)$ 的根 $alpha^i$ 都是 $C(x)$ 的根，所以令 $H_i (x) = sum_(j=0)^(2t) a^(i j) x^j$，那么 $chevron.l H_i (x), C(x) chevron.r = C(alpha^i) = 0$，因此 ${H_i (x)}_{i = r+1...r+2t}$ 是一组正交补空间的基。]
+  定义 *Parity-check polynomial* $H(x) = (x^n - 1) / G(x)$。$deg H(x) = n - 2t = m$，令 $H^*(x) = x^(deg H(x)) H(x^(-1))$ 是 $H(x)$ 的 Reciprocal polynomial。${ H^*(x) dot x^0, H^*(x) dot x, ..., H^*(x) dot x^(2t-1) }$ 是正交补空间的一组基。
+  #quote(block: true)[
+    他们是正交补空间的基的简短证明：这组基显然线性无关。同样，${ G(x) dot x^0, G(x) dot x, ..., G(x) dot x^(m-1) }$ 是 Codeword 空间的一组基。为了证明他们是正交补，只需要证明两组基中任选向量内积为 0 即可。
+
+    注意到，$chevron.l G(x) dot x^i, H^*(x) dot x^j chevron.r$ 正是表达式 $G(x) dot H(x) mod (x^n - 1)$ 的 $deg H(x) + j - i$ 次项系数。而 $G(x) dot H(x) = x^n - 1$
+  ]
+  #quote(block: true)[对于使用 Powers of primitive root 构造的 $G(x)$，有更简单的办法给一组基。注意到任何 $G(x)$ 的根 $alpha^i$ 都是 $C(x)$ 的根，所以令 $H_i (x) = sum_(j=0)^(2t) a^(i j) x^j$，那么 $chevron.l H_i (x), C(x) chevron.r = C(alpha^i) = 0$，因此 ${H_i (x)}_{i = r+1...r+2t}$ 是一组正交补空间的基。]
 
   上述构造出的正交补空间的基不一定正交，但是我们还是可以把 $C(x)$ 投影上去，如果正确的编码是 $C_0 (x)$，投影得到的结果是 $E(x) = C(x) - C_0 (x)$ 也就是错误项在选定基下的坐标。这一坐标通常被称为 Syndrome ${S_i}_(i = 1...2t)$。
   #quote(block: true)[在使用 Power of primitive root 构造的 $G(x)$ 的情况下，投影直接就是求值，因此不用存储 $H$ 矩阵。]
