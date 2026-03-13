@@ -34,4 +34,6 @@
 
   - 如果只考虑 FOL 的有限模型 (finite model theory)， valid FOL sentences is not RE. 与之对比，在任意模型内，根据 Completeness theorem, 枚举 proof 就可以枚举 valid sentences 了。See: #link("https://en.wikipedia.org/wiki/Trakhtenbrot%27s_theorem#Intuitive_proof")[Trakhtenbrot's theorem].
 
+    因此，在 FOL 的这种解读下，FOL 也不存在 sound and complete deduction system。
+
 ]
