@@ -22,7 +22,9 @@ jobs:
       - name: Generate posts.typ
         run: bun run build
 
-      - uses: typst-community/setup-typst@v4
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: 0.15.0
 
       - name: Compile to HTML
         run: typst compile --features html -f html index.typ

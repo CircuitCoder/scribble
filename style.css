@@ -1,4 +1,4 @@
-@import "https://fonts.thu.fail/css2?family=Noto+Serif+SC:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap";
+@import "https://fonts.thu.fail/css2?family=STIX+Two+Math&family=Noto+Serif+SC:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap";
 
 * {
   box-sizing: inherit;
@@ -105,4 +105,20 @@ blockquote {
   /* Avoid margin collapse */
   padding: 0.01px 20px;
   border-left: rgba(0,0,0,.1) 10px solid;
+}
+
+math {
+  font-family: "STIX Two Math", math;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body[data-mathml-mode="on"] [data-mathml="hide"],
+body[data-mathml-mode="off"] [data-mathml="show"] {
+  display: none;
+}
+
+figure[role="math"] {
+  display: flex;
+  justify-content: center;
 }
