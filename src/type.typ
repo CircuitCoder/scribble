@@ -147,7 +147,7 @@
   接下来，$e_n = F(e_(n-1)), p_n = F(p_(n-1))$，具体 Ctor 中每个分量作用在 EP-pair 上的行为取决于 Ctor 的 Variance：
   - C1 不作用： $e_n ("C1") = "C1", p_n ("C1") = "C1"$。
   - $e_n ("C2" x y) = F(e_(n-1))("C2" x y) = "C2" e_(n-1) (x) e_(n-1) (y)$, $p_n ("C2" x y) = F(p_(n-1))("C2" x y) = "C2" p_(n-1) (x) p_(n-1) (y)$
-  - 注意到右复合 $p_(n-1)$ 可以将函数作用于提高一次迭代，右复合 $e_(n-1)$ 可以将函数作用于降低一次迭代，因此这里有一次拧转：
+  - 注意到右复合 $p_(n-1)$ 可以将函数作用域提高一次迭代，右复合 $e_(n-1)$ 可以将函数作用域降低一次迭代，因此这里有一次拧转：
     $e_n ("C3" f) = "C3" f circle.tiny p_(n-1)$, $p_n ("C3" g) = "C3" g circle.tiny e_(n-1)$
 
   可以验证对于所有 $n$, $e_n$ 和 $p_n$ 都构成一组 EP-pair. 这样修过以后的 Functor $F$ 一定是 Covariant 的。在这个基础上可以直接用 Adamek's Theorem。注意到，$F$ 不是在原来的 #husk 范畴上定义的，而是其一个只包含 EP-pair 的子范畴。假设最终得到的 (Co)limit 是 $F_omega$，根据 Lambek's Lemma, $F_omega tilde.eq F(F_omega)$。又因为 $F_omega arrows.lr^(e_omega)_(p_omega) F(F_omega)$，所以 $e_omega$ 和 $p_omega$ 就是这个同构。它们的名字叫 `unfold` 和 `fold`。
@@ -160,7 +160,7 @@
 
   在 #husk 中，${bot}$ 并不是 Initial object，因为一个 Non-strict 态射可以将 $bot$ 映射到任何值上。事实上，`Mu A` 甚至通常不是 Initial $F-$algebra，对于任意的 Endofunctor $F$，在 #husk 中 Initial $F-$algebra 也无法保证存在。通常来说，我们要求 Initiality 只能是在 #husk 的 strict subcategory 内，也就是只包含 Strict morphisms 的子范畴。
 
-  一个范畴中对于 Endofunctor $F$ 如果 Initial $F-$algebra 和 Final $F-$coalgebra 永远存在且永远一致，那么这个范畴被称为 Algebraically compact，See: https://ncatlab.org/nlab/show/algebraically+compact+category 。如果 $F$ locally continuous + covariant，那么 $F-$algebra 和 $F-$coalgebra 在 Strict subcategory 内是良定义的。`Mu F` 和 `Nu F` 同构，并且在 Strict subcategory 内分别是 Initial $F-$algebra 和 Final $F-$coalgebra，因此 Strict subcategory 对于这一类 Endofunctor 是 Algebraically compact 的。
+  一个范畴中对于 Endofunctor $F$ 如果 Initial $F-$algebra 和 Final $F-$coalgebra 永远存在且永远一致，那么这个范畴被称为 Algebraically compact，See: https://ncatlab.org/nlab/show/algebraically+compact+category 。如果 $F$ locally continuous + covariant，那么 $F-$algebra 和 $F-$coalgebra 在 Strict subcategory 内是良定义的。`Mu F` 和 `Nu F` 同构，并且在 Strict subcategory 内分别是 Initial $F-$algebra 和 Final $F-$coalgebra，因此 Strict subcategory 对于这一类 Endofunctor 是 Algebraically compact 的。对于 Mixed variance，需要使用 Bifree algebra 定义。
 
   === About strictness
 
