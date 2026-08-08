@@ -126,3 +126,7 @@ figure[role="math"] {
 .todo {
   color: red;
 }
+
+.hint {
+  color: #666;
+}

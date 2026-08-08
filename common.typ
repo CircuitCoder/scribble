@@ -21,3 +21,7 @@
 #let todo(content) = context {
   html.elem("sup", attrs: (class: "todo"))[[#content]]
 }
+
+#let hint(content) = context {
+  html.elem("sub", attrs: (class: "hint"))[[#content]]
+}
