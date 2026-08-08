@@ -15,6 +15,12 @@
   }
 }
 
+// The modified title function
+#show heading.where(level: 1): it => html.elem("h1", it.body)
+#show heading.where(level: 2): it => html.elem("h2", it.body)
+#show heading.where(level: 3): it => html.elem("h3", it.body)
+#show heading.where(level: 4): it => html.elem("h4", it.body)
+
 #html.elem("html")[
   #html.elem("head")[
     #html.elem("meta", attrs: (charset: "UTF-8"))

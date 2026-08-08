@@ -9,11 +9,13 @@
 }
 
 body {
+  --bg-color: #fdfdf6;
+  --decoration-color: color-mix(in srgb, var(--bg-color) 90%, #000 10%);
   padding: 0;
   margin: 0;
   font-family: "Inter", "Source Han Sans SC", "Source Han Sans", sans-serif;
   font-size: 14px;
-  background-color: #fdfdf6;
+  background-color: var(--bg-color);
   color: #333;
   line-height: 22px;
   letter-spacing: 0.01em;
@@ -22,6 +24,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", "Noto Serif SC", "Source Han Serif SC", "Source Han Serif", serif;
   font-weight: 700;
+}
+
+h2 {
+  margin-top: 1.5em;
 }
 
 main {
@@ -83,7 +89,7 @@ article::after {
   left: 100%;
   transform: translateX(10px);
   width: 5px;
-  border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid var(--decoration-color);
   border-left: none;
   @media (max-width: 700px) {
     transform: translateX(5px);
@@ -129,4 +135,43 @@ figure[role="math"] {
 
 .hint {
   color: #666;
+}
+
+nav[role="doc-toc"] {
+  margin: 0;
+  padding: 10px 20px;
+  border-left: 10px solid var(--decoration-color);
+  background: rgba(0,0,0,.04);
+}
+
+nav[role="doc-toc"] ol {
+  padding-left: 20px;
+}
+
+nav[role="doc-toc"] > ol {
+  padding-left: 0;
+  margin: 0;
+}
+
+@media (min-width: 1200px) {
+  article {
+    display: grid;
+    grid-template-columns: 100% 0px;
+    align-items: start;
+    column-gap: 35px;
+  }
+
+  article > * {
+    grid-column: 1;
+  }
+
+  .post-toc {
+    grid-column: 2;
+    grid-row: 1;
+    grid-row: 1 / span 99999;
+    position: sticky;
+    top: 20px;
+    width: calc((100vw - 570px) / 2 - 10px);
+    margin-top: 20px;
+  }
 }
