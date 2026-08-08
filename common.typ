@@ -17,3 +17,7 @@
     #body
   ]
 }
+
+#let todo(content) = context {
+  html.elem("sup", attrs: (class: "todo"))[[#content]]
+}

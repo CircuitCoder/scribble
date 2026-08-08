@@ -122,3 +122,7 @@ figure[role="math"] {
   display: flex;
   justify-content: center;
 }
+
+.todo {
+  color: red;
+}

@@ -1,14 +1,18 @@
 #show math.equation.where(block: false): it => {
-  [
+  if target() == "html" [
     #html.elem("span", attrs: (role: "math", "data-mathml": "hide"), box(html.frame(it)))
     #html.elem("span", attrs: (role: "math", "data-mathml": "show"), it)
-  ]
+  ] else {
+    it
+  }
 }
 #show math.equation.where(block: true): it => {
-  [
+  if target() == "html" [
     #html.elem("figure", attrs: (role: "math", "data-mathml": "hide"), html.frame(it))
     #html.elem("figure", attrs: (role: "math", "data-mathml": "show"), it)
-  ]
+  ] else {
+    it
+  }
 }
 
 #html.elem("html")[
