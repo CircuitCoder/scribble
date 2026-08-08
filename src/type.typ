@@ -5,7 +5,7 @@
   == Eliminator
   Rocq 和 Agda 的 Inductive type 的 Elimination 都是 pattern matching as intrinsic, induction principle 是生成出来的。因此有的时候为了写明白 motive 会比较麻烦。
 
-  == Characterizing inductive / coinductive types
+  == Characterizing inductive / coinductive / recursive types
 
   常见的 (Co)inductive type 刻画方式有三种：考虑一个长相是 constructors 的 function / functor $F$
   - $F$ 的最小 / 最大不动点：将所有类型简单解读到 Set-valued semantics 上时的刻画
@@ -180,4 +180,10 @@
   See:
   - Call-by-push-value: https://pblevy.github.io/papers/hosc05.pdf 在 CBPV 中，明确拆分了 Thunking 和 Lifting 操作，成为了一对 Adjoint functor，因为它明确拆分了 Value category 和 Computation category。在传统的 Domain theory 中，Thunking 和 Lifting 是混在一起的，成为了一个 monad。
   - Lecture Note on Monad-Based Programming \@ FAU: https://www8.cs.fau.de/ext/teaching/sose2023/mbprog/mbprog-skript.pdf
+
+  === Additional resources
+  - Cornell CS 6110 Lecture Notes on Scott's $D_infinity$ Construction: https://www.cs.cornell.edu/courses/cs6110/2014sp/Lectures/lec24.pdf
+  - Domain Theory: Corrected and expanded version (Abramsky, Jung) (1994): https://www.cs.ox.ac.uk/people/stephen.abram/DomainTheory.pdf 对经典 Domain theory 经典且全面的综述
+  - The Category-Theoretic Solution of Recursive Domain Equations (Smyth, Plotkin) (1982): 系统化了通过 Order-enriched categories, EP-pair 求解 Recursive type 的方法
+  - Algebraically complete categories (Freyd) (1991): 比较现代的 axiomatic domain theory 的奠基性论文，通过 Dialgebra / Bifree algebra 解决 Mixed variance，并通过此定义 Algebraically compact category
 ]
