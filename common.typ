@@ -1,4 +1,4 @@
-#import "@preview/suboutline:0.2.0": suboutline
+#import "@preview/suboutline:0.3.0": suboutline
 
 #let scribble-hash = state("commit-hash")
 #let scribble-id = state("post-id")
