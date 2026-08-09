@@ -68,7 +68,7 @@
 
   Also see: Effective Topos.
 
-  === Godel's diagonal lemma
+  === Gödel's diagonal lemma
   Diagonal lemma 用的是第二条路径，构造不动点。
 
   首先，我们要简化一下 Lawvere's theorem 的证明。注意到如果我们把上面的证明打开，有两个可以简化的地方：
@@ -94,7 +94,7 @@
     d : (godel(alpha(x))) |-> godel(alpha(overline(godel(alpha(x)))))
   $
 
-  ... 其中 $alpha(x)$ 不是一个语句，x 是自由变元。我们将其原样做 Godel coding。对于不是一元谓词编码的输入，输出 0。根据 Godel coding 可以在 *Q* 内被表示，存在一个可定义的一元谓词 $gamma (x)$ 满足对于任意 $n in NN$,
+  ... 其中 $alpha(x)$ 不是一个语句，x 是自由变元。我们将其原样做 Gödel coding。对于不是一元谓词编码的输入，输出 0。根据 Gödel coding 可以在 *Q* 内被表示，存在一个可定义的一元谓词 $gamma (x)$ 满足对于任意 $n in NN$,
 
   $
     bold(Q) tack.r gamma (overline(n)) <-> psi (overline(d(n)))
@@ -117,7 +117,7 @@
     - $alpha$-行："$alpha$ 被该列描述"，以及 $alpha$ self-application
     - $beta$-列："该行由 $beta$ 描述"，及被描述谓词的 self-application
     - $(alpha, beta)$："$beta$ 描述 $alpha$"，以及 $alpha$ self-application
-    - $(alpha, alpha)$:  "$alpha$ 描述 $alpha$"，并且此时第二个分量正好变成前面这句话的 Godel number
+    - $(alpha, alpha)$:  "$alpha$ 描述 $alpha$"，并且此时第二个分量正好变成前面这句话的 Gödel number
   ]
 
   那么：
@@ -133,17 +133,40 @@
 
   因此 $f(gamma, gamma)$ 是 $g_psi$ 的不动点。注意第一个分量：$[gamma(overline(godel(gamma(x))))] = [psi(overline(godel(gamma(overline(godel(gamma(x)))))))]$，即 $phi = gamma(overline(godel(gamma(x))))$，并且 $bold(Q) tack.r phi <-> psi(overline(godel(phi)))$
 
-  /*
+  ==== Remarks
+
+  以下 Remark 的理论 *T* 以 *Q* 或者 *PA* 为例，结构是指这个理论的结构。
+
+  *Gödel's first incompleteness theorem* (original): 定义二元谓词 $"Prov"(y, x)$ 为 "y 是某一语句的证明的编码，这一语句的编码是 x"。令 $psi (x) eq.def forall y (not "Prov"(y, x))$。不动点 $phi <-> forall y (not "Prov" (y, godel(phi)))$ 等价于自身的不可证性。
+
+  - Consistency 给出 $bold(T) tack.r.not phi$。
+  - 如果 $bold(T) tack.r not phi$，也就是 $exists y ("Prov"(y, godel(phi)))$，在 Non-$omega$-consistent 的理论中，这可能被一个非标自然数验证。对于 $omega$-consistency 理论，同时有 $bold(T) tack.r.not not phi$。
+
+  *Gödel-Rosser's incompleteness theorem*: 令 $"Neg"$ 表示 Gödel number 上添加一个逻辑取反的符号：$"Neg"(godel(alpha)) eq.def godel(not alpha)$。令
+
+  $
+    psi (x) eq.def forall y ("Prov"(y, x) -> exists z (z < y and "Prov"(z, "Neg"(x))))
+  $
+
+  即对于任意 $x$ 的证明 $y$，都存在一个比 $y$ 更小的，not $x$ 的证明。将其不动点称为 $phi$。
+  - 如果 $T tack.r phi$，那么存在一个 $n in NN$，$T tack.r "Prov"(overline(n), overline(godel(phi)))$，因此存在一个更小的逻辑取反的证明，只有有限个可能，可以在 *PA* / *Q* 内枚举验证，矛盾。
+  - 如果 $T tack.r not phi$，即 $T tack.r exists y ("Prov"(y, overline(godel(phi))) and forall z ("Prov"(z, "Neg"(overline(godel(phi)))) -> z >= y))$。注意到存在一个 $n in NN$ 验证了 $"Prov"(overline(n), "Neg"(overline(godel(phi))))$，因此 $exists y <= overline(n) ("Prov"(y, overline(godel(phi))))$，这只有有限个可能，可以在 *PA* / *Q* 内枚举验证，矛盾。
+  所以 Rosser's trick 去掉了对于 $omega$-consistency 的要求。
+
+  *Tarski's undefinability theorem*: 如果存在一个可定义谓词 $T(n)$ 描述 $ungodel(n)$ 在某个特定结构 $M$ 中的真实性，那么定义 $psi (n) eq.def not T (n)$，不动点 $phi <-> not T (godel(phi))$ 是 $T$ 上述性质的反例。
+
+  References:
+  - A Universal Approach to Self-Referential Paradoxes, Incompleteness and Fixed Points (Yanofsky) (2003) 比较经典的 Text，使用集合的方法描述的对角线方法，但是对于 Diagonal lemma 的处理有些不良定义的地方。
+  - Diagonalization as computation: Gödel sentence construction and a type-disciplined blueprint (Vestrucci) (2026) 上了 Type 之后修正之后的 Text
+
+
   ==== Caveats
 
   事实上这里有很多很多坑：
 
-  如果尝试直接定义 $NN$ 子集范畴，态射是所有语言的可定义/可计算函数，然后找一个 $F$ 是所有语句的 Godel 编码集合，看上去 $f : NN -> F^NN$ 直接就工作了。但是这里有个问题：这个 $f$ 的值域是受限的，所以不能直接定义成 `id`，而是必须得有一个方法检查一个整数是不是一个 $NN -> F$ 的编码，也就是要判断任意函数的值域是不是一个语句的 Godel 编码。In general，这应该是 Undecidable 的。
+  如果尝试直接定义 $NN$ 子集范畴，态射是所有语言的 total computable 函数（都可以在 *Q* 里面定义），然后找一个 $F$ 是所有语句的 Gödel 编码集合，看上去 $f : NN -> F^NN$ 直接就工作了。但是这里有个问题：这个 $f$ 的值域是受限的，所以不能直接定义成 `id`，而是必须得有一个方法检查一个整数是不是一个 $NN -> F$ 的编码，也就是要判断任意函数的值域是不是一个语句的 Gödel 编码。In general，这应该是 Undecidable 的。
 
-  Q 上的可定义函数和 PRF 是同一个类，这个问题根源是不存在 Universal PRF 函数。
-
-  范畴定义中一定要用 Lindenbaum classes，也就是要商一次可证关系，因为 Lawvere's theorem 只能让我们找到不动点，而不是找到某种 Automorphism。既然我们最后要找的东西是 $phi <-> psi(godel(phi))$，这里做不到严格相等，只能做到可证等价。
-  */
+  Gödel numbering does not factor through Lindenbaum classes，对于 $psi <-> phi$，可能存在谓词 $gamma$ 使得 $gamma (overline(godel(psi)))$ 和 $gamma (overline(godel(phi)))$ 真值不同，所以一定有 $bold(Q) tack.r.not gamma(overline(godel(psi))) <-> gamma(overline(godel(phi)))$。这是 Yanofsky 的构造中的漏洞。
 
   === Remarks
 
