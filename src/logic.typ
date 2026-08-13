@@ -153,6 +153,11 @@
   - 如果 $T tack.r not phi$，即 $T tack.r exists y ("Prov"(y, overline(godel(phi))) and forall z ("Prov"(z, "Neg"(overline(godel(phi)))) -> z >= y))$。注意到存在一个 $n in NN$ 验证了 $"Prov"(overline(n), "Neg"(overline(godel(phi))))$，因此 $exists y <= overline(n) ("Prov"(y, overline(godel(phi))))$，这只有有限个可能，可以在 *PA* / *Q* 内枚举验证，矛盾。
   所以 Rosser's trick 去掉了对于 $omega$-consistency 的要求。
 
+  *Gödel's second incompleteness theorem*: 找一个明显有矛盾的语句，例如在等值逻辑+*Q* 上，令 $bot eq.def overline(0) = overline(1)$。一个理论是 Consistent 的 iff. 它不能证明 $bot$，所以定义 $"Con"(bold(T)) eq.def not exists x ("Prov"(x, overline(godel(bot))))$。
+  令 $phi$ 表示我们在原先 First incompleteness theorem 中构造的在 *T* 中可证和自身不可证明性等价的语句。注意到我们可以把整个 First incompleteness theorem 的证明也在 *T* 内部编码，所以 $bold(T) tack.r "Con"(T) -> not exists x ("Prov"(x, overline(godel(phi))))$，也就是 $bold(T) tack.r "Con"(T) -> phi$。
+
+  因此，如果有 $bold(T) tack.r "Con"(T)$，那么 $bold(T) tack.r phi$，与 First incompleteness theorem 矛盾。
+
   *Tarski's undefinability theorem*: 如果存在一个可定义谓词 $T(n)$ 描述 $ungodel(n)$ 在某个特定结构 $M$ 中的真实性，那么定义 $psi (n) eq.def not T (n)$，不动点 $phi <-> not T (godel(phi))$ 是 $T$ 上述性质的反例。
 
   References:
